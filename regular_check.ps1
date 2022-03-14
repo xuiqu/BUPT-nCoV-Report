@@ -31,6 +31,7 @@ $res = Invoke-WebRequest -UseBasicParsing -Uri "https://app.bupt.edu.cn/uc/wap/l
 };
 
 if ($res.StatusCode -ne 200 -or (ConvertFrom-Json $res.Content).e -ne 0) {
+    Write-Host $res.Content;
     throw "登录失败";
 }
 
@@ -54,6 +55,7 @@ $res = Invoke-WebRequest -UseBasicParsing -Uri "https://app.bupt.edu.cn/xisuncov
 
 $content = ConvertFrom-Json($res.Content);
 if ($res.StatusCode -ne 200 -or $content.e -ne 0) {
+    Write-Host $res.Content;
     throw "现存填报数据获取失败，手动填报一次可能会解决问题";
 }
 $data = $content.d.info;
@@ -93,6 +95,7 @@ $res = Invoke-WebRequest -UseBasicParsing -Uri "https://app.bupt.edu.cn/xisuncov
 };
 
 if ($res.StatusCode -ne 200 -or (ConvertFrom-Json $res.Content).e -ne 0) {
+    Write-Host $res.Content;
     throw "打卡失败";
 }
 

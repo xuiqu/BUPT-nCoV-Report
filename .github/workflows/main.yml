@@ -13,7 +13,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Daily report.
         if: github.event.schedule == '5 16 * * *'
-        continue-on-error: true
         env:
           BUPT_USERNAME: ${{ secrets.BUPT_USERNAME }}
           BUPT_PASSWORD: ${{ secrets.BUPT_PASSWORD }}

@@ -31,12 +31,13 @@ $res = Invoke-WebRequest -UseBasicParsing -Uri "https://app.bupt.edu.cn/uc/wap/l
 };
 
 if ($res.StatusCode -ne 200 -or (ConvertFrom-Json $res.Content).e -ne 0) {
+    Write-Host $res.Content;
     throw "登录失败";
 }
 
 Write-Host "登录成功，开始每日打卡";
 
-$body = ConvertFrom-Json $env:DAILY_REPORT_FORM;
+$body = ConvertFrom-Json $env:DAILY_REPORT_FORM -AsHashtable;
 $body.Remove("date");
 $body.Remove("uid");
 $body.Remove("id");
@@ -64,6 +65,7 @@ $res = Invoke-WebRequest -UseBasicParsing -Uri "https://app.bupt.edu.cn/ncov/wap
     -Body $body;
 
 if ($res.StatusCode -ne 200 -or (ConvertFrom-Json $res.Content).e -ne 0) {
+    Write-Host $res.Content;
     throw "打卡失败";
 }
 
