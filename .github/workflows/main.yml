@@ -1,6 +1,7 @@
 name: pwsh-script
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "35 16 * * *"
     - cron: "25 4 * * *"
